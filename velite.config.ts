@@ -2,7 +2,6 @@ import { defineConfig, defineCollection, s } from "velite";
 import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import remarkDirective from "remark-directive";
 import { rehypeGithubAlerts } from "rehype-github-alerts";
 
 const computedFields = <T extends { slug: string }>(data: T) => ({
@@ -22,6 +21,7 @@ const posts = defineCollection({
       published: s.boolean().default(true),
       tags: s.array(s.string()).optional(),
       img: s.string(),
+      authors: s.array(s.string()).optional(),
       body: s.mdx(),
     })
     .transform(computedFields),

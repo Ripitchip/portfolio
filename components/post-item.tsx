@@ -44,6 +44,9 @@ export function PostItem({
           <Tag tag={tag} key={tag} />
         ))}
       </div>
+      {authors && (
+        <div className="max-w-none text-muted-foreground">{authors[0]}</div>
+      )}
       {description && (
         <div className="max-w-none text-muted-foreground">{description}</div>
       )}

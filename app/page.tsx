@@ -54,6 +54,7 @@ export default function Home() {
                   date={post.date}
                   tags={post.tags}
                   img={post.img}
+                  authors={post.authors}
                 />
               </li>
             )
