@@ -1,0 +1,133 @@
+[data-rehype-pretty-code-figure] pre {
+  @apply px-0;
+}
+
+[data-rehype-pretty-code-figure] code {
+  @apply text-sm !leading-loose md:text-base border-0 p-0;
+}
+
+[data-rehype-pretty-code-figure] code[data-line-numbers] {
+  counter-reset: line;
+}
+
+[data-rehype-pretty-code-figure] code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  @apply mr-4 inline-block w-4 text-right text-gray-500;
+}
+
+[data-rehype-pretty-code-figure] [data-line] {
+  @apply border-l-2 border-l-transparent px-3;
+}
+
+[data-rehype-pretty-code-figure] [data-highlighted-line] {
+  background: rgba(200, 200, 255, 0.1);
+  @apply border-l-blue-400;
+}
+
+[data-rehype-pretty-code-figure] [data-highlighted-chars] {
+  @apply rounded bg-zinc-600/50;
+  box-shadow: 0 0 0 4px rgb(82 82 91 / 0.5);
+}
+
+[data-rehype-pretty-code-figure] [data-chars-id] {
+  @apply border-b-2 p-1 shadow-none;
+}
+
+.subheading-anchor {
+  @apply no-underline hover:underline;
+}
+
+.visually-hidden:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+:root {
+  --github-alert-default-color: rgb(208, 215, 222);
+  --github-alert-note-color: rgb(9, 105, 218);
+  --github-alert-tip-color: rgb(26, 127, 55);
+  --github-alert-important-color: rgb(130, 80, 223);
+  --github-alert-warning-color: rgb(191, 135, 0);
+  --github-alert-caution-color: rgb(207, 34, 46);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --github-alert-default-color: rgb(48, 54, 61);
+    --github-alert-note-color: rgb(31, 111, 235);
+    --github-alert-tip-color: rgb(35, 134, 54);
+    --github-alert-important-color: rgb(137, 87, 229);
+    --github-alert-warning-color: rgb(158, 106, 3);
+    --github-alert-caution-color: rgb(248, 81, 73);
+  }
+}
+
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  border-left: 0.25em solid var(--github-alert-default-color);
+}
+
+.markdown-alert > :first-child {
+  margin-top: 0;
+}
+
+.markdown-alert > :last-child {
+  margin-bottom: 0;
+}
+
+.markdown-alert-note {
+  border-left-color: var(--github-alert-note-color);
+}
+
+.markdown-alert-tip {
+  border-left-color: var(--github-alert-tip-color);
+}
+
+.markdown-alert-important {
+  border-left-color: var(--github-alert-important-color);
+}
+
+.markdown-alert-warning {
+  border-left-color: var(--github-alert-warning-color);
+}
+
+.markdown-alert-caution {
+  border-left-color: var(--github-alert-caution-color);
+}
+
+.markdown-alert-title {
+  display: flex;
+  margin-bottom: 4px;
+  align-items: center;
+}
+
+.markdown-alert-title > svg {
+  margin-right: 8px;
+}
+
+.markdown-alert-note .markdown-alert-title {
+  color: var(--github-alert-note-color);
+}
+
+.markdown-alert-tip .markdown-alert-title {
+  color: var(--github-alert-tip-color);
+}
+
+.markdown-alert-important .markdown-alert-title {
+  color: var(--github-alert-important-color);
+}
+
+.markdown-alert-warning .markdown-alert-title {
+  color: var(--github-alert-warning-color);
+}
+
+.markdown-alert-caution .markdown-alert-title {
+  color: var(--github-alert-caution-color);
+}
