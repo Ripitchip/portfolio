@@ -21,7 +21,7 @@ const posts = defineCollection({
       published: s.boolean().default(true),
       tags: s.array(s.string()).optional(),
       img: s.string(),
-      authors: s.array(s.string()).optional(),
+      authors: s.array(s.string()),
       body: s.mdx(),
     })
     .transform(computedFields),
