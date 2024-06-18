@@ -8,6 +8,12 @@ import { siteConfig } from "@/config/site";
 import { Tag } from "@/components/tag";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import Image from "next/image";
+import {
+	HoverCard,
+	HoverCardContent,
+	HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 interface ProjectPageProps {
 	params: {
@@ -70,34 +76,90 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
 	return (
 		<article className="container py-6 prose dark:prose-invert max-w-3xl mx-auto">
-			<h1 className="mb-2">{project.title}</h1>
-			<div className="flex gap-2 mb-2">
-				{project.tags?.map((tag) => (
-					<Tag tag={tag} key={tag} />
-				))}
-			</div>
-			<p>{project.link}</p>
-			{project.description ? (
-				<p className="text-xl mt-0 text-muted-foreground">
-					{project.description}
-				</p>
-			) : null}
-			<div className=" m-1 flex flex-row items-center space-x-2">
-				{project.authors.map((author) => (
-					<div key={author} className="flex flex-row items-center">
-						<Avatar key={author}>
-							<Link href={`https://github.com/${author}`}>
-								<AvatarImage
-									loading="eager"
-									src={`https://github.com/${author}.png`}
-								/>
-								<AvatarFallback>
-									{author.slice(0, 2).toUpperCase()}
-								</AvatarFallback>
-							</Link>
-						</Avatar>
+			<div className="grid grid-cols-2 gap-4">
+				<div>
+					<h1 className="mb-2">{project.title}</h1>
+					<div className="flex gap-2 mb-2">
+						{project.tags?.map((tag) => (
+							<Tag tag={tag} key={tag} />
+						))}
 					</div>
-				))}
+					<p>{project.link}</p>
+					{project.description && (
+						<p className="text-xl mt-0 text-muted-foreground">
+							{project.description}
+						</p>
+					)}
+					{project.authors?.length ? (
+						<div className="flex space-x-6">
+							{project.authors.map((author) =>
+								author ? (
+									<div key={author} className="flex items-center  text-sm">
+										<Link
+											href={`https://github.com/${author}`}
+											className="rounded-2xl p-3 mt-0 mb-0 flex items-center text-sm"
+										>
+											<Avatar>
+												<AvatarImage
+													loading="eager"
+													src={`https://github.com/${author}.png`}
+												/>
+												<AvatarFallback>
+													{author.slice(0, 2).toUpperCase()}
+												</AvatarFallback>
+											</Avatar>
+										</Link>
+										<div className="flex-1 mt-0 mb-0 text-left leading-tight">
+											<HoverCard>
+												<HoverCardTrigger>
+													<Link href={`https://github.com/${author}`}>
+														<p className="font-medium mt-0 mb-0">{author}</p>
+													</Link>
+												</HoverCardTrigger>
+												<HoverCardContent>
+													<div
+														key={author}
+														className="flex items-center  text-sm"
+													>
+														<div className="rounded-2xl p-3 mt-0 mb-0 flex items-center text-sm">
+															<Avatar>
+																<AvatarImage
+																	loading="eager"
+																	src={`https://github.com/${author}.png`}
+																/>
+																<AvatarFallback>
+																	{author.slice(0, 2).toUpperCase()}
+																</AvatarFallback>
+															</Avatar>
+														</div>
+														<div className="flex-1 mt-0 mb-0 text-left leading-tight">
+															<p className="font-medium mt-0 mb-0">{author}</p>
+															<p className="text-[12px] mt-0 mb-0 text-muted-foreground">
+																@{author}
+															</p>
+														</div>
+													</div>
+												</HoverCardContent>
+											</HoverCard>
+											<p className="text-[12px] mt-0 mb-0 text-muted-foreground">
+												@{author}
+											</p>
+										</div>
+									</div>
+								) : null,
+							)}
+						</div>
+					) : null}
+				</div>
+				<Image
+					src={project.img}
+					alt={project.img}
+					width={250}
+					height={250}
+					className="mt-0 mb-0 rounded-md bg-muted transition-colors"
+				/>
+
+				<div></div>
 			</div>
 			<hr className="my-4" />
 			<MDXContent code={project.body} />
