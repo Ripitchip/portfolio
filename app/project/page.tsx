@@ -38,7 +38,7 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
 
 	return (
 		<div className="container max-w-4xl py-6 lg:py-10">
-			<div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
+			<div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8 mb-12">
 				<div className="flex-1 space-y-4">
 					<h1 className="inline-block font-black text-4xl lg:text-5xl">
 						My Projects
@@ -48,9 +48,8 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
 					</p>
 				</div>
 			</div>
-			<div className="grid grid-cols-12 gap-3 mt-8">
+			<div className="grid grid-cols-12 gap-12 mt-8">
 				<div className="col-span-12 col-start-1 sm:col-span-8">
-					<hr />
 					{displayProjects?.length > 0 ? (
 						<ul className="grid gap-10 sm:grid-cols-2">
 							{displayProjects.map((project) => {
@@ -88,16 +87,18 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
 						className="justify-end mt-4"
 					/>
 				</div>
-				<Card className="col-span-12 row-start-3 h-fit sm:col-span-4 sm:col-start-9 sm:row-start-1">
-					<CardHeader>
-						<CardTitle>Tags</CardTitle>
-					</CardHeader>
-					<CardContent className="flex flex-wrap gap-2">
-						{sortedTags?.map((tag) => (
-							<Tag tag={tag} key={tag} count={tags[tag]} />
-						))}
-					</CardContent>
-				</Card>
+				<div className="col-span-12 row-start-3 h-fit sm:col-span-4 sm:col-start-9 sm:row-start-1">
+					<Card className="">
+						<CardHeader>
+							<CardTitle>Tags</CardTitle>
+						</CardHeader>
+						<CardContent className="flex flex-wrap gap-2">
+							{sortedTags?.map((tag) => (
+								<Tag tag={tag} key={tag} count={tags[tag]} />
+							))}
+						</CardContent>
+					</Card>
+				</div>
 			</div>
 		</div>
 	);

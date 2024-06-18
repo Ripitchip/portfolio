@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 	description: "This is a description",
 };
 
-const POSTS_PER_PAGE = 5;
+const POSTS_PER_PAGE = 3;
 
 interface BlogPageProps {
 	searchParams: {
@@ -21,7 +21,11 @@ interface BlogPageProps {
 
 export default async function BlogPage({ searchParams }: BlogPageProps) {
 	const currentPage = Number(searchParams?.page) || 1;
-	const sortedPosts = sortElement(posts.filter((post) => post.published));
+	const sortedPosts = sortElement(
+		posts
+			.filter((post) => post.published)
+			.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
+	);
 	const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE);
 
 	const displayPosts = sortedPosts.slice(
