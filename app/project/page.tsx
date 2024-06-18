@@ -1,58 +1,70 @@
-import { posts } from "#site/content";
-import { PostItem } from "@/components/post-item";
+import { projects, Project } from "#site/content";
+import { ProjectItem } from "@/components/project-item";
 import { QueryPagination } from "@/components/query-pagination";
 import { Tag } from "@/components/tag";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getAllTags, sortPosts, sortTagsByCount } from "@/lib/utils";
+import { getAllTags, sortElement, sortTagsByCount } from "@/lib/utils";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "My blog",
-	description: "This is a description",
+	title: "My Projects",
+	description: "Hope this projects will make you happy",
 };
 
-const POSTS_PER_PAGE = 5;
+const PROJECT_PER_PAGE = 4;
 
-interface BlogPageProps {
+interface ProjectPageProps {
 	searchParams: {
 		page?: string;
 	};
 }
 
-export default async function BlogPage({ searchParams }: BlogPageProps) {
+export default async function ProjectPage({ searchParams }: ProjectPageProps) {
 	const currentPage = Number(searchParams?.page) || 1;
-	const sortedPosts = sortPosts(posts.filter((post) => post.published));
-	const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE);
+	const publishedProjects: Array<Project> = projects.filter(
+		(project) => project.published,
+	);
+	const totalPages = Math.ceil(publishedProjects.length / PROJECT_PER_PAGE);
 
-	const displayPosts = sortedPosts.slice(
-		POSTS_PER_PAGE * (currentPage - 1),
-		POSTS_PER_PAGE * currentPage,
+	const displayProjects: Array<Project> = publishedProjects.slice(
+		PROJECT_PER_PAGE * (currentPage - 1),
+		PROJECT_PER_PAGE * currentPage,
 	);
 
-	const tags = getAllTags(posts);
+	const tags = getAllTags(projects);
 	const sortedTags = sortTagsByCount(tags);
 
 	return (
 		<div className="container max-w-4xl py-6 lg:py-10">
 			<div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
 				<div className="flex-1 space-y-4">
-					<h1 className="inline-block font-black text-4xl lg:text-5xl">Blog</h1>
+					<h1 className="inline-block font-black text-4xl lg:text-5xl">
+						My Projects
+					</h1>
 					<p className="text-xl text-muted-foreground">
-						My ramblings on all things web dev.
+						Hope this projects will make you happy
 					</p>
 				</div>
 			</div>
 			<div className="grid grid-cols-12 gap-3 mt-8">
 				<div className="col-span-12 col-start-1 sm:col-span-8">
 					<hr />
-					{displayPosts?.length > 0 ? (
+					{displayProjects?.length > 0 ? (
 						<ul className="flex flex-col">
-							{displayPosts.map((post) => {
-								const { slug, date, title, description, tags, img, authors } =
-									post;
+							{displayProjects.map((project) => {
+								const {
+									slug,
+									date,
+									title,
+									description,
+									tags,
+									img,
+									authors,
+									link,
+								} = project;
 								return (
 									<li key={slug}>
-										<PostItem
+										<ProjectItem
 											slug={slug}
 											date={date}
 											title={title}
@@ -60,6 +72,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 											tags={tags}
 											img={img}
 											authors={authors}
+											link={link}
 										/>
 									</li>
 								);
