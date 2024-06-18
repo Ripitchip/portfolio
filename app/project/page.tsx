@@ -21,12 +21,14 @@ interface ProjectPageProps {
 
 export default async function ProjectPage({ searchParams }: ProjectPageProps) {
 	const currentPage = Number(searchParams?.page) || 1;
-	const publishedProjects: Array<Project> = projects.filter(
-		(project) => project.published,
+	const publishedProjectsOrdered: Array<Project> = projects
+		.filter((project) => project.published)
+		.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+	const totalPages = Math.ceil(
+		publishedProjectsOrdered.length / PROJECT_PER_PAGE,
 	);
-	const totalPages = Math.ceil(publishedProjects.length / PROJECT_PER_PAGE);
 
-	const displayProjects: Array<Project> = publishedProjects.slice(
+	const displayProjects: Array<Project> = publishedProjectsOrdered.slice(
 		PROJECT_PER_PAGE * (currentPage - 1),
 		PROJECT_PER_PAGE * currentPage,
 	);
@@ -50,7 +52,7 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
 				<div className="col-span-12 col-start-1 sm:col-span-8">
 					<hr />
 					{displayProjects?.length > 0 ? (
-						<ul className="flex flex-col">
+						<ul className="grid gap-10 sm:grid-cols-2">
 							{displayProjects.map((project) => {
 								const {
 									slug,

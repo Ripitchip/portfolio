@@ -9,13 +9,13 @@ import { Tag } from "@/components/tag";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 
-interface PostPageProps {
+interface ProjectPageProps {
 	params: {
 		slug: string[];
 	};
 }
 
-async function getProjectFromParams(params: PostPageProps["params"]) {
+async function getProjectFromParams(params: ProjectPageProps["params"]) {
 	const slug = params?.slug?.join("/");
 	const project = projects.find((project) => project.slugAsParams === slug);
 
@@ -24,7 +24,7 @@ async function getProjectFromParams(params: PostPageProps["params"]) {
 
 export async function generateMetadata({
 	params,
-}: PostPageProps): Promise<Metadata> {
+}: ProjectPageProps): Promise<Metadata> {
 	const project = await getProjectFromParams(params);
 
 	if (!project) {
@@ -56,12 +56,12 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParamsProject(): Promise<
-	PostPageProps["params"][]
+	ProjectPageProps["params"][]
 > {
 	return projects.map((project) => ({ slug: project.slugAsParams.split("/") }));
 }
 
-export default async function PostPage({ params }: PostPageProps) {
+export default async function ProjectPage({ params }: ProjectPageProps) {
 	const project = await getProjectFromParams(params);
 
 	if (!project || !project.published) {
