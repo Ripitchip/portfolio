@@ -77,6 +77,14 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
+    maxWidth: {
+      "1/3": "33.33%",
+      "1/5": "20%",
+    },
+    maxHeight: {
+      "1/3": "33.33%",
+      "1/5": "20%",
+    },
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config;

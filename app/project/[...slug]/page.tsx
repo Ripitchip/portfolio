@@ -14,6 +14,8 @@ import {
 	HoverCardContent,
 	HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface ProjectPageProps {
 	params: {
@@ -84,14 +86,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 							<Tag tag={tag} key={tag} />
 						))}
 					</div>
-					<p>{project.link}</p>
 					{project.description && (
 						<p className="text-xl mt-0 text-muted-foreground">
 							{project.description}
 						</p>
 					)}
 					{project.authors?.length ? (
-						<div className="flex space-x-6">
+						<div className="mt-4 flex space-x-6">
 							{project.authors.map((author) =>
 								author ? (
 									<div key={author} className="flex items-center  text-sm">
@@ -111,33 +112,25 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 										</Link>
 										<div className="flex-1 mt-0 mb-0 text-left leading-tight">
 											<HoverCard>
-												<HoverCardTrigger>
-													<Link href={`https://github.com/${author}`}>
-														<p className="font-medium mt-0 mb-0">{author}</p>
-													</Link>
+												<HoverCardTrigger href={`https://github.com/${author}`}>
+													<p className="font-medium mt-0 mb-0">{author}</p>
 												</HoverCardTrigger>
 												<HoverCardContent>
 													<div
 														key={author}
 														className="flex items-center  text-sm"
 													>
-														<div className="rounded-2xl p-3 mt-0 mb-0 flex items-center text-sm">
-															<Avatar>
-																<AvatarImage
-																	loading="eager"
-																	src={`https://github.com/${author}.png`}
-																/>
-																<AvatarFallback>
-																	{author.slice(0, 2).toUpperCase()}
-																</AvatarFallback>
-															</Avatar>
-														</div>
-														<div className="flex-1 mt-0 mb-0 text-left leading-tight">
-															<p className="font-medium mt-0 mb-0">{author}</p>
-															<p className="text-[12px] mt-0 mb-0 text-muted-foreground">
-																@{author}
-															</p>
-														</div>
+														<Avatar>
+															<AvatarImage
+																loading="eager"
+																src={`https://github.com/${author}.png`}
+															/>
+															<AvatarFallback>
+																{author.slice(0, 2).toUpperCase()}
+															</AvatarFallback>
+														</Avatar>
+														<p className="font-medium mt-0 mb-0">{author}</p>
+														<p className="font-medium mt-0 mb-0">{author}</p>
 													</div>
 												</HoverCardContent>
 											</HoverCard>
@@ -150,6 +143,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 							)}
 						</div>
 					) : null}
+					<Button asChild className="mt-4">
+						<Link href={project.link}>
+							<ExternalLink className="mr-2 h-4 w-4" /> Visit Project
+						</Link>
+					</Button>
 				</div>
 				<Image
 					src={project.img}

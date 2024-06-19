@@ -48,6 +48,7 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
 					</p>
 				</div>
 			</div>
+			<hr />
 			<div className="grid grid-cols-12 gap-12 mt-8">
 				<div className="col-span-12 col-start-1 sm:col-span-8">
 					{displayProjects?.length > 0 ? (
