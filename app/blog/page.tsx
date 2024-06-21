@@ -50,7 +50,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 				<div className="col-span-12 col-start-1 sm:col-span-8">
 					<hr className="mb-4" />
 					{displayPosts?.length > 0 ? (
-						<ul className="flex flex-col">
+						<ul className="flex flex-col gap-y-6">
 							{displayPosts.map((post) => {
 								const { slug, date, title, description, tags, img, authors } =
 									post;

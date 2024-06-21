@@ -1,5 +1,3 @@
-"use client";
-
 import { Calendar } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
@@ -28,29 +26,16 @@ export function PostItem({
 	img,
 	authors,
 }: PostItemProps) {
-	const containerRef = useRef<HTMLDivElement>(null);
-	const imageRef = useRef<HTMLImageElement>(null);
-
-	useEffect(() => {
-		if (containerRef.current && imageRef.current) {
-			imageRef.current.style.height = `${containerRef.current.clientHeight}px`;
-		}
-	}, [containerRef.current]);
 	return (
-		<article
-			ref={containerRef}
-			className="flex flex-row gap-2 h-screen align-items-center"
-		>
-			<div className="flex lg:block h-full justify-center">
+		<article className="flex flex-row gap-2 align-items-center h-[200px]">
+			<div className="flex hidden lg:block justify-center w-1/3 h-full">
 				<img
 					src={img}
 					alt="Post thumbnail"
-					width={200}
-					height={containerRef.current?.clientHeight}
-					className="rounded-lg hidden lg:block mr-2"
+					className="rounded-lg mr-2 object-cover h-full w-full"
 				/>
 			</div>
-			<div className="flex flex-col gap-2 border-border border-b py-3 w-70">
+			<div className="flex flex-col border-b h-full lg:w-2/3 ">
 				<div className="flex items-center">
 					<Image
 						src={img}
@@ -61,7 +46,7 @@ export function PostItem({
 					/>
 
 					<div className="flex flex-col ">
-						<h2 className="text-2xl font-bold mb-2">
+						<h2 className="text-2xl font-bold mb-2 mt-0">
 							<Link href={`/${slug}`}>{title}</Link>
 						</h2>
 						<div className="flex gap-2">
@@ -72,7 +57,9 @@ export function PostItem({
 					</div>
 				</div>
 				{description && (
-					<div className="max-w-none text-muted-foreground">{description}</div>
+					<div className="max-w-none text-muted-foreground">
+						<p className="line-clamp-1">{description}</p>
+					</div>
 				)}
 
 				<div className="flex gap-2 mt-2">
