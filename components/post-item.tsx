@@ -37,7 +37,7 @@ export function PostItem({
 			</div>
 			<div className="flex flex-col border-b h-full lg:w-2/3 ">
 				<div className="flex items-center">
-					<Image
+					<img
 						src={img}
 						alt="Post thumbnail"
 						width={60}
