@@ -10,38 +10,22 @@ import {
 	sortTagsByCount,
 } from "@/lib/utils";
 import { slug } from "github-slugger";
-import { Metadata } from "next";
+import { TagPageProps } from "./page";
 
-export interface TagPageProps {
-	params: {
-		tag: string;
-	};
-}
-
-export async function generateMetadata({
-	params,
-}: TagPageProps): Promise<Metadata> {
-	const { tag } = params;
-	return {
-		title: tag,
-		description: `Posts on the topic of ${tag}`,
-	};
-}
-
-export const generateStaticParams = () => {
-	const tags = getAllTags(posts);
-	const paths = Object.keys(tags).map((tag) => ({ tag: slug(tag) }));
-	return paths;
-};
-
-export default function TagPage({ params }: TagPageProps) {
+export function TagPageProject({ params }: TagPageProps) {
 	const { tag } = params;
 	const title = tag.split("-").join(" ");
 
-	const allPosts = getElementByTagSlug(posts, tag);
-	const displayPosts = allPosts.filter((post) => post.published);
-	const tags = getAllTags(posts);
-	const sortedTags = sortTagsByCount(tags);
+	const publishedProjectsOrdered: Array<Project> = projects;
+	const allProjects: Array<Project> = getElementByTagSlugP(
+		publishedProjectsOrdered,
+		tag,
+	);
+	const displayPosts: Array<Project> = allProjects.filter(
+		(project) => project.published,
+	);
+	const tags: Record<string, number> = getAllTags(projects);
+	const sortedTags: string[] = sortTagsByCount(tags);
 
 	return (
 		<div className="container max-w-4xl py-6 lg:py-10">
@@ -58,11 +42,19 @@ export default function TagPage({ params }: TagPageProps) {
 					{displayPosts?.length > 0 ? (
 						<ul className="flex flex-col">
 							{displayPosts.map((post) => {
-								const { slug, date, title, description, tags, img, authors } =
-									post;
+								const {
+									slug,
+									date,
+									title,
+									description,
+									tags,
+									img,
+									authors,
+									link,
+								} = post;
 								return (
 									<li key={slug}>
-										<PostItem
+										<ProjectItem
 											slug={slug}
 											date={date}
 											title={title}
@@ -70,6 +62,7 @@ export default function TagPage({ params }: TagPageProps) {
 											tags={tags}
 											img={img}
 											authors={authors}
+											link={link}
 										/>
 									</li>
 								);

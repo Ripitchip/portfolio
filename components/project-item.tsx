@@ -28,16 +28,16 @@ export function ProjectItem({
 	link,
 }: ProjectItemProps) {
 	return (
-		<article className="group relative flex flex-col space-y-1">
-			{img && (
-				<Image
-					src={img}
-					alt={title}
-					width={600}
-					height={600}
-					className="rounded-md border bg-muted transition-colors"
-				/>
-			)}
+		<article className="group relative flex flex-col space-y-2 p-4 h-[350px]">
+			<div className="h-3/4">
+				{img && (
+					<img
+						src={img}
+						alt={title}
+						className="rounded-lg mr-2 object-cover h-full w-full"
+					/>
+				)}
+			</div>
 			<h2 className="text-2xl font-extrabold">{title}</h2>
 			{description && <p className="text-muted-foreground">{description}</p>}
 			{date && (

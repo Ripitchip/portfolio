@@ -25,26 +25,36 @@ export function sortElement(elements: Array<Post | Project>) {
 }
 
 export function getAllTags(elements: Array<Post | Project>) {
-  const tags: Record<string, number> = {}
-  elements.forEach(element => {
+  const tags: Record<string, number> = {};
+  elements.forEach((element) => {
     if (element.published) {
-      element.tags?.forEach(tag => {
+      element.tags?.forEach((tag) => {
         tags[tag] = (tags[tag] ?? 0) + 1;
-      })
+      });
     }
-  })
+  });
   return tags;
 }
 
-
 export function sortTagsByCount(tags: Record<string, number>) {
-  return Object.keys(tags).sort((a, b) => tags[b] - tags[a])
+  return Object.keys(tags).sort((a, b) => tags[b] - tags[a]);
 }
 
-export function getElementByTagSlug(posts: Array<Post | Project>, tag: string) {
-  return posts.filter(post => {
-    if (!post.tags) return false
-    const slugifiedTags = post.tags.map(tag => slug(tag))
-    return slugifiedTags.includes(tag)
-  })
+export function getElementByTagSlug(
+  elements: Array<Post | Project>,
+  tag: string,
+) {
+  return elements.filter((element) => {
+    if (!element.tags) return false;
+    const slugifiedTags = element.tags.map((tag) => slug(tag));
+    return slugifiedTags.includes(tag);
+  });
+}
+
+export function getElementByTagSlugP(elements: Array<Project>, tag: string) {
+  return elements.filter((element) => {
+    if (!element.tags) return false;
+    const slugifiedTags = element.tags.map((tag) => slug(tag));
+    return slugifiedTags.includes(tag);
+  });
 }

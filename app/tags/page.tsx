@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 	description: "Topic I've written about",
 };
 
-export default async function TagsPostPage() {
+export default async function TagsPage() {
 	const tags = getAllTags(posts);
 	const sortedTags = sortTagsByCount(tags);
 
