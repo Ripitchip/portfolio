@@ -6,4 +6,4 @@ deploy_image:
   script:
     - 'which ssh-agent || (apt-get update -y && apt-get install openssh-client -y)'
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-    - ssh user@mypatch.fr "cd portfolio && docker compose down && docker pull && docker compose up -d"
+    - ssh brioche@mypatch.fr "cd portfolio && docker compose down && docker pull && docker compose up -d"
