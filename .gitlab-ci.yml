@@ -1,0 +1,10 @@
+stages:
+  - deploy
+
+deploy_image:
+  stage: deploy
+  script:
+    - 'which ssh-agent || (apt-get update -y && apt-get install openssh-client -y)'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - ssh user@mypatch.fr "cd portfolio && docker-compose down && docker-compose up -d"
