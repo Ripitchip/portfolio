@@ -25,4 +25,4 @@ deploy_image:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-    - ssh user@mypatch.fr "cd portfolio && docker-compose down && docker-compose up -d"
+    - ssh user@mypatch.fr "cd portfolio && docker compose down && docker compose down && docker compose up -d"
