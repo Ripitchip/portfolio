@@ -42,7 +42,7 @@ export function PostItem({
             alt="Post thumbnail"
             width={60}
             height={60}
-            className="rounded-lg lg:hidden mr-2"
+            className="rounded-lg lg:hidden mr-2 object-cover h-full"
           />
 
           <div className="flex flex-col ">
@@ -50,7 +50,9 @@ export function PostItem({
               <Link href={`/${slug}`}>{title}</Link>
             </h2>
             <div className="flex gap-2">
-              {tags?.map((tag) => <Tag tag={tag} key={tag} />)}
+              {tags?.map((tag) => (
+                <Tag tag={tag} key={tag} />
+              ))}
             </div>
           </div>
         </div>
