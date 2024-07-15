@@ -29,11 +29,13 @@ export function PostItem({
   return (
     <article className="flex flex-row gap-2 align-items-center h-[200px]">
       <div className="flex hidden lg:block justify-center w-1/3 h-full">
-        <img
-          src={img}
-          alt="Post thumbnail"
-          className="rounded-lg mr-2 object-cover h-full w-full"
-        />
+        <Link href={`/${slug}`}>
+          <img
+            src={img}
+            alt="Post thumbnail"
+            className="rounded-lg mr-2 object-cover h-full w-full"
+          />
+        </Link>
       </div>
       <div className="flex flex-col border-b h-full lg:w-2/3 w-full ">
         <div className="flex items-center">
@@ -50,9 +52,7 @@ export function PostItem({
               <Link href={`/${slug}`}>{title}</Link>
             </h2>
             <div className="flex gap-2">
-              {tags?.map((tag) => (
-                <Tag tag={tag} key={tag} />
-              ))}
+              {tags?.map((tag) => <Tag tag={tag} key={tag} />)}
             </div>
           </div>
         </div>
