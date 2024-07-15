@@ -1,6 +1,7 @@
 import { posts } from "#site/content";
 import { MDXContent } from "@/components/mdx-components";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 
 import "@/styles/mdx.css";
 import { Metadata } from "next";
@@ -8,6 +9,13 @@ import { siteConfig } from "@/config/site";
 import { Tag } from "@/components/tag";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import { findAuthorByName } from "@/lib/utils";
+import { Author } from "#site/content";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 interface PostPageProps {
   params: {
@@ -37,7 +45,7 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.description,
-    writers: { name: siteConfig.author },
+    authors: { name: siteConfig.author },
     openGraph: {
       title: post.title,
       description: post.description,
@@ -67,32 +75,96 @@ export default async function PostPage({ params }: PostPageProps) {
   if (!post || !post.published) {
     notFound();
   }
+  const myAuthors: Array<Author> = post.writers.map((writer) =>
+    findAuthorByName(writer),
+  );
 
   return (
-    <article className="container py-6 prose dark:prose-invert max-w-3xl mx-auto">
-      <h1 className="mb-2">{post.title}</h1>
-      <div className="flex gap-2 mb-2">
-        {post.tags?.map((tag) => <Tag tag={tag} key={tag} />)}
-      </div>
-      {post.description ? (
-        <p className="text-xl mt-0 text-muted-foreground">{post.description}</p>
-      ) : null}
-      <div className=" m-1 flex flex-row items-center space-x-2">
-        {post.writers.map((author) => (
-          <div key={author} className="flex flex-row items-center">
-            <Avatar key={author}>
-              <Link href={`https://github.com/${author}`}>
-                <AvatarImage
-                  loading="eager"
-                  src={`https://github.com/${author}.png`}
-                />
-                <AvatarFallback>
-                  {author.slice(0, 2).toUpperCase()}
-                </AvatarFallback>
-              </Link>
-            </Avatar>
+    <article className="container py-6 prose dark:prose-invert max-w-4xl mx-auto">
+      <div className="flex flex-row gap-2 align-items-center h-[200px]">
+        <div className="flex flex-col h-full lg:w-2/3 w-full ">
+          <div className="flex items-center">
+            <img
+              src={post.img}
+              alt="Post thumbnail"
+              width={60}
+              height={60}
+              className="rounded-lg lg:hidden md:hidden mr-2 object-cover h-full"
+            />
+
+            <div className="flex flex-col ">
+              <h1 className="text-2xl font-bold mb-2 mt-0">{post.title}</h1>
+              <div className="flex gap-2">
+                {post.tags?.map((tag) => <Tag tag={tag} key={tag} />)}
+              </div>
+            </div>
           </div>
-        ))}
+          {post.description ? (
+            <p className="line-clamp-1 text-xl mt-0 mb-1 text-muted-foreground">
+              {post.description}
+            </p>
+          ) : null}
+          {myAuthors?.length ? (
+            <div className="flex space-x-6">
+              {myAuthors.map((author) =>
+                author ? (
+                  <div key={author.name} className="flex items-center  text-sm">
+                    <Link
+                      href={author.link}
+                      className="rounded-2xl p-3 mt-0 mb-0 flex items-center text-sm"
+                    >
+                      <Avatar>
+                        <AvatarImage loading="eager" src={author.avatar} />
+                        <AvatarFallback>
+                          {author.name.slice(0, 2).toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
+                    </Link>
+                    <div className="flex-1 mt-0 mb-0 text-left leading-tight">
+                      <HoverCard>
+                        <HoverCardTrigger href={`https://github.com/${author}`}>
+                          <p className="font-medium mt-0 mb-0">{author.name}</p>
+                        </HoverCardTrigger>
+                        <HoverCardContent>
+                          <div
+                            key={author.name}
+                            className="flex items-center  text-sm"
+                          >
+                            <Avatar>
+                              <AvatarImage
+                                loading="eager"
+                                src={`https://github.com/${author}.png`}
+                              />
+                              <AvatarFallback>
+                                {author.name.slice(0, 2).toUpperCase()}
+                              </AvatarFallback>
+                            </Avatar>
+                            <p className="font-medium mt-0 mb-0">
+                              {author.name}
+                            </p>
+                            <p className="font-medium mt-0 mb-0">
+                              {author.name}
+                            </p>
+                          </div>
+                        </HoverCardContent>
+                      </HoverCard>
+                      <p className="text-[12px] mt-0 mb-0 text-muted-foreground">
+                        @{author.name}
+                      </p>
+                    </div>
+                  </div>
+                ) : null,
+              )}
+            </div>
+          ) : null}
+        </div>
+        <div className="h-full md:block lg:block hidden ">
+          <img
+            src={post.img}
+            alt={post.img}
+            className="rounded-lg mr-2 object-cover h-auto w-full mt-0 mb-0"
+          />
+        </div>
       </div>
       <hr className="my-4" />
       <MDXContent code={post.body} />

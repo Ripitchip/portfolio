@@ -7,8 +7,9 @@ import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import { Tag } from "@/components/tag";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Author } from "#site/content";
 import Link from "next/link";
-import Image from "next/image";
+import { findAuthorByName } from "@/lib/utils";
 import {
   HoverCard,
   HoverCardContent,
@@ -44,7 +45,7 @@ export async function generateMetadata({
   return {
     title: project.title,
     description: project.description,
-    writers: { name: siteConfig.author },
+    authors: { name: siteConfig.author },
     openGraph: {
       title: project.title,
       description: project.description,
@@ -69,6 +70,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
+  const myAuthors: Array<Author> = project.writers.map((writer) =>
+    findAuthorByName(writer),
+  );
   return (
     <article className="container py-6 prose dark:prose-invert max-w-3xl mx-auto">
       <div className="grid grid-cols-2 gap-4">
@@ -82,33 +86,30 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               {project.description}
             </p>
           )}
-          {project.writers?.length ? (
+          {myAuthors?.length ? (
             <div className="mt-4 flex space-x-6">
-              {project.writers.map((author) =>
+              {myAuthors.map((author) =>
                 author ? (
-                  <div key={author} className="flex items-center  text-sm">
+                  <div key={author.name} className="flex items-center  text-sm">
                     <Link
-                      href={`https://github.com/${author}`}
+                      href={author.link}
                       className="rounded-2xl p-3 mt-0 mb-0 flex items-center text-sm"
                     >
                       <Avatar>
-                        <AvatarImage
-                          loading="eager"
-                          src={`https://github.com/${author}.png`}
-                        />
+                        <AvatarImage loading="eager" src={author.avatar} />
                         <AvatarFallback>
-                          {author.slice(0, 2).toUpperCase()}
+                          {author.name.slice(0, 2).toUpperCase()}
                         </AvatarFallback>
                       </Avatar>
                     </Link>
                     <div className="flex-1 mt-0 mb-0 text-left leading-tight">
                       <HoverCard>
                         <HoverCardTrigger href={`https://github.com/${author}`}>
-                          <p className="font-medium mt-0 mb-0">{author}</p>
+                          <p className="font-medium mt-0 mb-0">{author.name}</p>
                         </HoverCardTrigger>
                         <HoverCardContent>
                           <div
-                            key={author}
+                            key={author.name}
                             className="flex items-center  text-sm"
                           >
                             <Avatar>
@@ -117,16 +118,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                                 src={`https://github.com/${author}.png`}
                               />
                               <AvatarFallback>
-                                {author.slice(0, 2).toUpperCase()}
+                                {author.name.slice(0, 2).toUpperCase()}
                               </AvatarFallback>
                             </Avatar>
-                            <p className="font-medium mt-0 mb-0">{author}</p>
-                            <p className="font-medium mt-0 mb-0">{author}</p>
+                            <p className="font-medium mt-0 mb-0">
+                              {author.name}
+                            </p>
+                            <p className="font-medium mt-0 mb-0">
+                              {author.name}
+                            </p>
                           </div>
                         </HoverCardContent>
                       </HoverCard>
                       <p className="text-[12px] mt-0 mb-0 text-muted-foreground">
-                        @{author}
+                        @{author.name}
                       </p>
                     </div>
                   </div>
