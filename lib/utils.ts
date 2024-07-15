@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { Post, Project } from "#site/content";
+import { Post, Project, Author, authors } from "#site/content";
 import { slug } from "github-slugger";
 
 export function cn(...inputs: ClassValue[]) {
@@ -51,6 +51,13 @@ export function getElementByTagSlug(
   });
 }
 
+export function findAuthorByName(name: string): Author {
+  const author = authors.find((author) => author.name === name);
+  if (!author) {
+    throw new Error(`Author with name "${name}" not found.`);
+  }
+  return author;
+}
 export function getElementByTagSlugP(elements: Array<Project>, tag: string) {
   return elements.filter((element) => {
     if (!element.tags) return false;

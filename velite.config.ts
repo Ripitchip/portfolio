@@ -21,7 +21,7 @@ const posts = defineCollection({
       published: s.boolean().default(true),
       tags: s.array(s.string()).optional(),
       img: s.string(),
-      authors: s.array(s.string()),
+      writers: s.array(s.string()),
       body: s.mdx(),
     })
     .transform(computedFields),
@@ -39,7 +39,7 @@ const projects = defineCollection({
       published: s.boolean().default(true),
       tags: s.array(s.string()).optional(),
       img: s.string(),
-      authors: s.array(s.string()),
+      writers: s.array(s.string()),
       link: s.string(),
       body: s.mdx(),
     })
@@ -48,7 +48,7 @@ const projects = defineCollection({
 
 const authors = defineCollection({
   name: "Author",
-  pattern: "author/**/*.mdx",
+  pattern: "authors/**/*.mdx",
   schema: s
     .object({
       slug: s.path(),

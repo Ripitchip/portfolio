@@ -1,7 +1,8 @@
 import { Calendar } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
-import { cn, formatDate } from "@/lib/utils";
+import { cn, formatDate, findAuthorByName } from "@/lib/utils";
+import { Author, authors } from "#site/content";
 import { Tag } from "./tag";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -14,7 +15,7 @@ interface PostItemProps {
   date: string;
   tags?: Array<string>;
   img: string; // Assuming path is still a string representing a URL or file path
-  authors: Array<string>;
+  writers: Array<string>;
 }
 
 export function PostItem({
@@ -24,8 +25,11 @@ export function PostItem({
   date,
   tags,
   img,
-  authors,
+  writers,
 }: PostItemProps) {
+  const myAuthors: Array<Author> = writers.map((writer) =>
+    findAuthorByName(writer),
+  );
   return (
     <article className="flex flex-row gap-2 align-items-center h-[200px]">
       <div className="flex hidden lg:block justify-center w-1/3 h-full">
@@ -63,16 +67,13 @@ export function PostItem({
         )}
 
         <div className="flex gap-2 mt-2">
-          {authors.map((author) => (
-            <div key={author} className="flex flex-row items-center mt-0">
-              <Avatar key={author}>
-                <Link href={`https://github.com/${author}`}>
-                  <AvatarImage
-                    loading="eager"
-                    src={`https://github.com/${author}.png`}
-                  />
+          {myAuthors.map((author) => (
+            <div key={author.name} className="flex flex-row items-center mt-0">
+              <Avatar key={author.avatar}>
+                <Link href={author.link}>
+                  <AvatarImage loading="eager" src={author.avatar} />
                   <AvatarFallback>
-                    {author.slice(0, 2).toUpperCase()}
+                    {author.name.slice(0, 2).toUpperCase()}
                   </AvatarFallback>
                 </Link>
               </Avatar>
