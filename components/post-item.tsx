@@ -52,7 +52,7 @@ export function PostItem({
           />
 
           <div className="flex flex-col ">
-            <h2 className="text-2xl font-bold mb-2 mt-0">
+            <h2 className="line-clamp-1  xs:text-lg sm:text-lg md:text-2xl lg:text-2xl font-bold mb-2 mt-0">
               <Link href={`/${slug}`}>{title}</Link>
             </h2>
             <div className="flex gap-2">
