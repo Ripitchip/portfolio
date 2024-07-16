@@ -1,0 +1,22 @@
+---
+title: Configure and use docker
+description: A little tutorial of what I learned with docker
+date: 2024-07-16
+tags: ["code", "docker"]
+published: true
+img: /nixos.jpg
+writers : ["Brioche"]
+---
+
+## First install docker compose and setup everything
+
+```sh
+sudo apt install docker
+````
+
+In order to not run docker as sudo user, add docker group to user:
+```sh
+sudo usermod -aG docker <YourUserName>
+```
+
+
