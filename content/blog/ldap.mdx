@@ -1,0 +1,46 @@
+---
+title: Configuring ldap and keycloak
+description: A little configuration with docker compose
+date: 2024-07-18
+tags: ["code", "docker"]
+published: true
+img: /keycloak.png
+writers : ["Brioche"]
+---
+
+## First install docker compose and setup everything
+
+```yaml
+services:
+
+    interface:
+        image: wheelybird/ldap-user-manager:latest
+        ports:
+            - 8000:80
+        environment:
+            SERVER_HOSTNAME: ${LDAP_URL}
+            LDAP_URI: ldap://${LDAP_URL}
+            LDAP_BASE_DN: dc=${LDAP_DOMAIN},dc=${LDAP_DOMAIN_TLD}
+            LDAP_ADMINS_GROUP: admins
+            LDAP_ADMIN_BIND_DN: "cn=admin,dc=${LDAP_DOMAIN},dc=${LDAP_TLD}"
+            LDAP_ADMIN_BIND_PWD: ${LDAP_ADMIN_PASSWORD}
+            USERNAME_FORMAT: "{first_name_initial}{last_name}"
+            NO_HTTPS: "TRUE"
+
+    ldap_server:
+        image: osixia/openldap:latest
+        ports:
+            - "389:389"
+        volumes:
+            - "./ldap_var:/var/lib/ldap"
+            - "./ldap_etc:/etc/ldap/slapd.d"
+        environment:
+            LDAP_ORGANISATION: "${LDAP_DOMAIN}"
+            LDAP_DOMAIN: "${LDAP_DOMAIN}.${LDAP_DOMAIN_TLD}"
+            LDAP_ADMIN_PASSWORD: ${LDAP_ADMIN_PASSWORD}
+            LDAP_RFC2307BIS_SCHEMA: "true"
+            LDAP_TLS: "false"
+            LDAP_TLS_VERIFY_CLIENT: "never"
+```
+
+
