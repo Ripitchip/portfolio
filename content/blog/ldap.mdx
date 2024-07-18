@@ -7,23 +7,33 @@ published: true
 img: /keycloak.png
 writers : ["Brioche"]
 ---
+## Use cases of ldap
+<!-- !TODO insert link  -->
+LDAP is a tool that permits to create user and manage role, home directory ect.
+In order to have a single tool for the connection and a single user on all apps, 
+you may want to use keyloak. It is a tool that permit SAML and OPENID connection
+to all type of apps like gitlab or minio.
+Keycloak is a user authentificator, it won't save the user data, neigther the 
+home directory but will permit to sync ldap info and manage connection for all ldap users
 
 ## First install docker compose and setup everything
+You can find everything (everything)[./docker.html]:
 
+##
 ```yaml
 services:
 
     interface:
         image: wheelybird/ldap-user-manager:latest
         ports:
-            - 8000:80
+            - "8000:80"
         environment:
-            SERVER_HOSTNAME: ${LDAP_URL}
-            LDAP_URI: ldap://${LDAP_URL}
-            LDAP_BASE_DN: dc=${LDAP_DOMAIN},dc=${LDAP_DOMAIN_TLD}
-            LDAP_ADMINS_GROUP: admins
-            LDAP_ADMIN_BIND_DN: "cn=admin,dc=${LDAP_DOMAIN},dc=${LDAP_TLD}"
-            LDAP_ADMIN_BIND_PWD: ${LDAP_ADMIN_PASSWORD}
+            SERVER_HOSTNAME: "${LDAP_URL}"
+            LDAP_URI: "ldap://${LDAP_URL}"
+            LDAP_BASE_DN: "dc=${LDAP_DOMAIN},dc=${LDAP_DOMAIN_TLD}"
+            LDAP_ADMINS_GROUP: "admins"
+            LDAP_ADMIN_BIND_DN: "cn=admin,dc=${LDAP_DOMAIN},dc=${LDAP_DOMAIN_TLD}"
+            LDAP_ADMIN_BIND_PWD: "${LDAP_ADMIN_PASSWORD}"
             USERNAME_FORMAT: "{first_name_initial}{last_name}"
             NO_HTTPS: "TRUE"
 
@@ -37,10 +47,15 @@ services:
         environment:
             LDAP_ORGANISATION: "${LDAP_DOMAIN}"
             LDAP_DOMAIN: "${LDAP_DOMAIN}.${LDAP_DOMAIN_TLD}"
-            LDAP_ADMIN_PASSWORD: ${LDAP_ADMIN_PASSWORD}
+            LDAP_ADMIN_PASSWORD: "${LDAP_ADMIN_PASSWORD}"
             LDAP_RFC2307BIS_SCHEMA: "true"
             LDAP_TLS: "false"
             LDAP_TLS_VERIFY_CLIENT: "never"
+```
+
+You may want to use an env like this:
+```
+
 ```
 
 
