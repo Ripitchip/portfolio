@@ -32,7 +32,7 @@ export function ProjectItem({
       <div className="h-3/4">
         {img && (
           <img
-            src={img}
+            src={`/images/projects/${img}`}
             alt={title}
             className="rounded-lg mr-2 object-cover h-full w-full"
           />

@@ -146,7 +146,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </Button>
         </div>
         <img
-          src={project.img}
+          src={`/images/projects/${project.img}`}
           alt={project.img}
           width={250}
           height={250}

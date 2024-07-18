@@ -89,7 +89,7 @@ export default async function PostPage({ params }: PostPageProps) {
           </h1>
         </div>
         <img
-          src={post.img}
+          src={`/images/posts/${post.img}`}
           alt={post.img}
           width={250}
           height={250}

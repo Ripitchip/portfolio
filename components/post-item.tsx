@@ -31,11 +31,11 @@ export function PostItem({
     findAuthorByName(writer),
   );
   return (
-    <article className="flex flex-row gap-2 align-items-center h-[200px]">
+    <article className="flex flex-row gap-2 align-items-center h-[180px]">
       <div className="flex hidden lg:block justify-center w-1/3 h-full">
         <Link href={`/${slug}`}>
           <img
-            src={img}
+            src={`/images/posts/${img}`}
             alt="Post thumbnail"
             className="rounded-lg mr-2 object-cover h-full w-full"
           />
@@ -44,7 +44,7 @@ export function PostItem({
       <div className="flex flex-col border-b h-full lg:w-2/3 w-full ">
         <div className="flex items-center">
           <img
-            src={img}
+            src={`/images/posts/${img}`}
             alt="Post thumbnail"
             width={60}
             height={60}
