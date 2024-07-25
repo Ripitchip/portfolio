@@ -3,6 +3,7 @@ import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { rehypeGithubAlerts } from "rehype-github-alerts";
+import { transformerCopyButton } from '@rehype-pretty/transformers'
 
 const computedFields = <T extends { slug: string }>(data: T) => ({
   ...data,
@@ -73,7 +74,15 @@ export default defineConfig({
     rehypePlugins: [
       rehypeSlug,
       rehypeGithubAlerts,
-      [rehypePrettyCode, { theme: "github-dark" }],
+      [rehypePrettyCode, { theme: "github-dark",
+          transformers: [
+            transformerCopyButton({
+              visibility: 'always',
+              feedbackDuration: 2_500,
+            }),
+          ],
+      },
+    ],
       [
         rehypeAutolinkHeadings,
         {
