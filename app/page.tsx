@@ -31,7 +31,7 @@ export default function Home() {
               View my blog
             </Link>
             <Link
-              href={siteConfig.links.github}
+              href={siteConfig.links.git}
               target="_blank"
               rel="noreferrer"
               className={cn(
@@ -39,7 +39,7 @@ export default function Home() {
                 "w-full sm:w-fit",
               )}
             >
-              GitHub
+              GitLab
             </Link>
           </div>
         </div>
