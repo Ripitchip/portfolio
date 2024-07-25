@@ -1,11 +1,11 @@
 export const siteConfig = {
-  name: "BriBlog",
-  url: "https://example.com",
-  description: "Nextjs 14 blog using velite, tailwind and shadcn",
-  author: "JollyCoding",
+  name: "Thomas' Blog",
+  url: "https://mypatch.fr",
+  description: "The portfolio of Thomas",
+  author: "Thomas Derudder",
   links: {
-    github: "https://github.com/athomsAF",
-    personalSite: "https://kodelab.fr",
+    git: "https://gitlab.com/athomsAF",
+    personalSite: "https://mypatch.fr",
   },
 };
 

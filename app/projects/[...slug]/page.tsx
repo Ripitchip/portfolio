@@ -104,7 +104,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     </Link>
                     <div className="flex-1 mt-0 mb-0 text-left leading-tight">
                       <HoverCard>
-                        <HoverCardTrigger href={`https://github.com/${author}`}>
+                        <HoverCardTrigger href={author.link}>
                           <p className="font-medium mt-0 mb-0">{author.name}</p>
                         </HoverCardTrigger>
                         <HoverCardContent>
@@ -115,7 +115,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                             <Avatar>
                               <AvatarImage
                                 loading="eager"
-                                src={`https://github.com/${author}.png`}
+                                src={author.link}
                               />
                               <AvatarFallback>
                                 {author.name.slice(0, 2).toUpperCase()}

@@ -17,12 +17,11 @@ Keycloak is a user authentificator, it won't save the user data, neigther the
 home directory but will permit to sync ldap info and manage connection for all ldap users
 
 ## First install docker compose and setup everything
-You can find everything (everything)[./docker.html]:
+You can find everything [everything](https://mypatch.fr/blog/docker):
 
 ##
 ```yaml
 services:
-
     interface:
         image: wheelybird/ldap-user-manager:latest
         ports:
@@ -55,7 +54,21 @@ services:
 
 You may want to use an env like this:
 ```
+LDAP_ADMIN_PASSWORD=password
+LDAP_DOMAIN=domain
+LDAP_DOMAIN_TLD=org
+LDAP_URL=domain.org
+```
+LDAP\_URL may be a sub domain like ldap.domain.org
+
+
+## Configuration inside LDAP
+
+Go to your webapp (/setup) and enter the password saved in you .env
+
+![setupPageCapture](/images/posts/ldap/setup.png) 
+
+```py caption="test"
+print("hello")
 
 ```
-
-

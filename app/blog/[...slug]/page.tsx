@@ -123,7 +123,7 @@ export default async function PostPage({ params }: PostPageProps) {
                   </Link>
                   <div className="flex-1 mt-0 mb-0 text-left leading-tight">
                     <HoverCard>
-                      <HoverCardTrigger href={`https://github.com/${author}`}>
+                      <HoverCardTrigger href={author.link}>
                         <p className="font-medium mt-0 mb-0">{author.name}</p>
                       </HoverCardTrigger>
                       <HoverCardContent>
@@ -134,7 +134,7 @@ export default async function PostPage({ params }: PostPageProps) {
                           <Avatar>
                             <AvatarImage
                               loading="eager"
-                              src={`https://github.com/${author}.png`}
+                              src={author.link}
                             />
                             <AvatarFallback>
                               {author.name.slice(0, 2).toUpperCase()}
