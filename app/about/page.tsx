@@ -21,10 +21,8 @@ export default async function AboutPage() {
       <hr className="my-8" />
       <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
         <div className="min-w-48 max-w-48 flex flex-col gap-2  mt-0 mb-0">
-          <Image
+          <image
             src="/images/avatars/thomas.png"
-            width={500}
-            height={500}
             alt="Picture of the author"
             className="overflow-hidden rounded-full min-w-48 max-w-16"
           />
@@ -37,8 +35,8 @@ export default async function AboutPage() {
         </div>
         <div className="text-muted-foreground text-lg py-4 flex flex-col gap-2">
           <p className="flex">
-            Welcome to my portfolio! I'm Thomas, a passionate learner across
-            various fields. As an SRE intern, I dive into topics like
+            Welcome to my portfolio! I&apos;m Thomas, a passionate learner
+            across various fields. As an SRE intern, I dive into topics like
             Kubernetes, DevOps, and AI. I love exploring and sharing knowledge.
           </p>
           <p className="flex">
@@ -48,8 +46,8 @@ export default async function AboutPage() {
             working with development and operations teams.
           </p>
           <p className="flex">
-            I believe in the power of knowledge-sharing. Here, you'll find my
-            projects, thoughts, and discoveries. Hope you enjoy and get
+            I believe in the power of knowledge-sharing. Here, you&apos;ll find
+            my projects, thoughts, and discoveries. Hope you enjoy and get
             inspired!
           </p>
         </div>
