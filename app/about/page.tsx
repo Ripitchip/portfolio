@@ -21,8 +21,10 @@ export default async function AboutPage() {
       <hr className="my-8" />
       <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
         <div className="min-w-48 max-w-48 flex flex-col gap-2  mt-0 mb-0">
-          <image
+          <Image
             src="/images/avatars/thomas.png"
+            width="500"
+            height="500"
             alt="Picture of the author"
             className="overflow-hidden rounded-full min-w-48 max-w-16"
           />
