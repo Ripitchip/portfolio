@@ -47,6 +47,9 @@ importers:
       next-themes:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      playwright-core:
+        specifier: ^1.46.0
+        version: 1.46.0
       react:
         specifier: ^18
         version: 18.2.0
@@ -2500,8 +2503,8 @@ packages:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
     engines: {node: '>= 6'}
 
-  playwright-core@1.45.3:
-    resolution: {integrity: sha512-+ym0jNbcjikaOwwSZycFbwkWgfruWvYlJfThKYAlImbxUgdWFO2oW70ojPm4OpE4t6TAo2FY/smM+hpVTtkhDA==}
+  playwright-core@1.46.0:
+    resolution: {integrity: sha512-9Y/d5UIwuJk8t3+lhmMSAJyNP1BUC/DqP3cQJDQQL/oWqAiuPTLgy7Q5dzglmTLwcBRdetzgNM/gni7ckfTr6A==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -5417,7 +5420,7 @@ snapshots:
     dependencies:
       '@fortawesome/fontawesome-free': 6.6.0
       mermaid: 10.9.1
-      playwright-core: 1.45.3
+      playwright-core: 1.46.0
     transitivePeerDependencies:
       - supports-color
 
@@ -5975,7 +5978,7 @@ snapshots:
 
   pirates@4.0.6: {}
 
-  playwright-core@1.45.3: {}
+  playwright-core@1.46.0: {}
 
   possible-typed-array-names@1.0.0: {}
 

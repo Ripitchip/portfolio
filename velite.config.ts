@@ -4,6 +4,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { rehypeGithubAlerts } from "rehype-github-alerts";
 import { transformerCopyButton } from '@rehype-pretty/transformers'
+import rehypeMermaid from 'rehype-mermaid'
 
 const computedFields = <T extends { slug: string }>(data: T) => ({
   ...data,
@@ -60,6 +61,14 @@ const authors = defineCollection({
     .transform(computedFields),
 });
 
+
+const rehypePrettyCodeOptions: Options = {
+  theme: 'one-dark-pro',
+  onVisitLine(node: LineElement) {
+    // Prevent lines from collapsing in `display: grid` mode, and
+    // allow empty lines to be copy/pasted
+    }
+};
 export default defineConfig({
   root: "./content",
   output: {
@@ -72,17 +81,16 @@ export default defineConfig({
   collections: { posts, projects, authors },
   mdx: {
     rehypePlugins: [
+      rehypeMermaid,
       rehypeSlug,
       rehypeGithubAlerts,
-      [rehypePrettyCode, { theme: "github-dark",
-          transformers: [
-            transformerCopyButton({
-              visibility: 'always',
-              feedbackDuration: 2_500,
-            }),
-          ],
-      },
-    ],
+      [rehypePrettyCode,rehypePrettyCodeOptions],
+          // transformers: [
+          //   transformerCopyButton({
+          //     visibility: 'always',
+          //     feedbackDuration: 2_500,
+          //   }),
+          // ],
       [
         rehypeAutolinkHeadings,
         {
