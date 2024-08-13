@@ -1,0 +1,34 @@
+---
+title: Manage your database with Diesel ORM
+description: A little tutorial of what I learned with Diesel
+date: 2024-08-13
+tags: ["code", "bdd", "rust"]
+published: true
+img: diesel.png
+writers : ["Thomas"]
+---
+
+# First setup your rust project
+
+Foor now you can follow the content of the [documentation of Diesel](https://diesel.rs/guides/extending-diesel.html) 
+```sh
+cargo new --lib diesel_demo
+cd diesel_demo
+cargo add diesel --features mysql
+cargo add dotenvy
+```
+
+## Install diesel_cli
+Here comes the problems:
+```sh 
+cargo install diesel_cli
+```
+This above code doesn't work
+You need to first install the mysql connector, for that run the following:
+```sh
+sudo apt-get install libmysqlclient-dev
+```
+Or in windows install the package from [following website](https://downloads.mysql.com/archives/c-c/) 
+
+
+
