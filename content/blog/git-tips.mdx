@@ -8,7 +8,7 @@ img: git/Git-Tools.jpg
 writers : ["Thomas"]
 ---
 
-## Needs for this posts
+# Needs for this posts
 You need to know how git works,
 you can find it [here](https://thomas.mypatch.fr/blog/git) 
 
@@ -32,3 +32,36 @@ Here is your tool.
 Git Worktree permits to work on any branchs at any time.
 You need for that to create a Worktree, it is exactly like a clone of a unique branch.
 
+```sh
+git worktree add <path> <branch>
+// It can be like that:
+git clone https://gitlab.com/default/default.git
+cd default
+git worktree add ../develop develop
+
+// here is a tree view of the files now
+cd .. && tree .
+├── default
+│   └── README.md
+└── develop
+    └── README.md
+```
+
+## Git flow
+
+To install git flow simply run
+```sh
+sudo apt install git-flow
+```
+
+It is a really simple tool to manage the git flow. You can create and control needed branch like features one ect.
+For exemple to create a feature branch, simply run 
+```
+// init at first
+git flow init
+
+// now have fun
+git flow feature add documentation
+//it created a branch /feature/documentation
+```
+It really is a nice tool to understand a nice way to manage your branch.
