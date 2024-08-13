@@ -12,6 +12,9 @@ WORKDIR /app
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN pnpm install
+RUN pnpm exec playwright-core install --with-deps firefox
+RUN pnpm exec playwright-core install --with-deps webkit
+RUN pnpm exec playwright-core install --with-deps chromium
 
 FROM base AS dev
 
@@ -30,7 +33,6 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN pnpm exec playwright install
 RUN pnpm build
 
 FROM base AS runner

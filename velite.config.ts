@@ -62,13 +62,6 @@ const authors = defineCollection({
 });
 
 
-const rehypePrettyCodeOptions: Options = {
-  theme: 'one-dark-pro',
-  onVisitLine(node: LineElement) {
-    // Prevent lines from collapsing in `display: grid` mode, and
-    // allow empty lines to be copy/pasted
-    }
-};
 export default defineConfig({
   root: "./content",
   output: {
@@ -84,7 +77,7 @@ export default defineConfig({
       rehypeMermaid,
       rehypeSlug,
       rehypeGithubAlerts,
-      [rehypePrettyCode,rehypePrettyCodeOptions],
+      [rehypePrettyCode, { theme: "github-dark"}],
           // transformers: [
           //   transformerCopyButton({
           //     visibility: 'always',

@@ -3,7 +3,7 @@ services:
     container_name: frontend
     build:
       context: . #if your Dockerfile is not at the same level change the path here (./frontend)
-    restart: always #change if you don't want your container restarting
+    restart: unless-stopped #change if you don't want your container restarting
     environment:
       - NODE_ENV=production
     ports:
