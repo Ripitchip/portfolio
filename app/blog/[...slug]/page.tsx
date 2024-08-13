@@ -87,24 +87,22 @@ export default async function PostPage({ params }: PostPageProps) {
           <h1 className="mb-2 sm:text-md xs:text-md line-clamp-3">
             {post.title}
           </h1>
+          {post.description && (
+              <p className="line-clamp-4 xs:text-md sm:text-md text-xl mt-0 mb-0 text-muted-foreground">
+              {post.description}
+              </p>
+          )}
+          <div className="flex gap-2 mb-2 mt-3">
+          {post.tags?.map((tag) => <Tag tag={tag} key={tag} />)}
+          </div>
         </div>
         <img
           src={`/images/posts/${post.img}`}
           alt={post.img}
-          width={250}
-          height={250}
-          className="mt-0 mb-0 rounded-md bg-muted transition-colors"
+          className="mt-0 mb-0 rounded-md bg-muted transition-colors h-40"
         />
       </div>
       <div className="flex-col">
-        <div className="flex gap-2 mb-2">
-          {post.tags?.map((tag) => <Tag tag={tag} key={tag} />)}
-        </div>
-        {post.description && (
-          <p className="line-clamp-4 xs:text-md sm:text-md text-xl mt-0 mb-0 text-muted-foreground">
-            {post.description}
-          </p>
-        )}
         {myAuthors?.length ? (
           <div className="mt-0 flex space-x-6">
             {myAuthors.map((author) =>
