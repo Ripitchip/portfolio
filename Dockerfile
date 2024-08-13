@@ -30,6 +30,7 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
+RUN pnpm exec playwright install
 RUN pnpm build
 
 FROM base AS runner
