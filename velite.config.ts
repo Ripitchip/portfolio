@@ -3,8 +3,9 @@ import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { rehypeGithubAlerts } from "rehype-github-alerts";
-import { transformerCopyButton } from '@rehype-pretty/transformers'
-import rehypeMermaid from 'rehype-mermaid'
+import { transformerCopyButton } from "@rehype-pretty/transformers";
+import rehypeMermaid from "rehype-mermaid";
+import { addCopyButton } from "shiki-transformer-copy-button";
 
 const computedFields = <T extends { slug: string }>(data: T) => ({
   ...data,
@@ -60,7 +61,10 @@ const authors = defineCollection({
     })
     .transform(computedFields),
 });
-
+const options = {
+  // delay time from "copied" state back to normal state
+  toggle: 2000,
+};
 
 export default defineConfig({
   root: "./content",
@@ -77,13 +81,13 @@ export default defineConfig({
       rehypeMermaid,
       rehypeSlug,
       rehypeGithubAlerts,
-      [rehypePrettyCode, { theme: "github-dark"}],
-          // transformers: [
-          //   transformerCopyButton({
-          //     visibility: 'always',
-          //     feedbackDuration: 2_500,
-          //   }),
-          // ],
+      [
+        rehypePrettyCode,
+        {
+          theme: "github-dark",
+          transformers: [],
+        },
+      ],
       [
         rehypeAutolinkHeadings,
         {
