@@ -5,12 +5,13 @@ date: 2024-08-13
 tags: ["code", "bdd", "rust"]
 published: true
 img: diesel.png
-writers : ["Thomas"]
+writers: ["Thomas"]
 ---
 
 # First setup your rust project
 
-Foor now you can follow the content of the [documentation of Diesel](https://diesel.rs/guides/extending-diesel.html) 
+Foor now you can follow the content of the [documentation of Diesel](https://diesel.rs/guides/extending-diesel.html)
+
 ```sh
 cargo new --lib diesel_demo
 cd diesel_demo
@@ -19,16 +20,20 @@ cargo add dotenvy
 ```
 
 ## Install diesel_cli
+
 Here comes the problems:
-```sh 
+
+```sh title="test"
 cargo install diesel_cli
 ```
+
 This above code doesn't work
 You need to first install the mysql connector, for that run the following:
+
 ```sh
 sudo apt-get install libmysqlclient-dev
+# With archlinux:
+paru -S libmysqlclient
 ```
-Or in windows install the package from [following website](https://downloads.mysql.com/archives/c-c/) 
 
-
-
+Or in windows install the package from [following website](https://downloads.mysql.com/archives/c-c/)
