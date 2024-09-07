@@ -11,4 +11,4 @@ deploy_image:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
   script:
-    - ssh -o StrictHostKeyChecking=no ripitchip@mypatch.fr "cd portfolio; docker compose down; git pull; docker compose up -d build"
+    - ssh -o StrictHostKeyChecking=no ripitchip@mypatch.fr "cd portfolio; docker compose down; git pull; docker compose up -d --build"
