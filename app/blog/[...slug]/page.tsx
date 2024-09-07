@@ -88,70 +88,79 @@ export default async function PostPage({ params }: PostPageProps) {
             {post.title}
           </h1>
           {post.description && (
-              <p className="line-clamp-4 xs:text-md sm:text-md text-xl mt-0 mb-0 text-muted-foreground">
+            <p className="line-clamp-4 xs:text-md sm:text-md text-xl mt-0 mb-0 text-muted-foreground">
               {post.description}
-              </p>
+            </p>
           )}
           <div className="flex gap-2 mb-2 mt-3">
-          {post.tags?.map((tag) => <Tag tag={tag} key={tag} />)}
+            {post.tags?.map((tag) => <Tag tag={tag} key={tag} />)}
+          </div>
+          <div className="flex-col">
+            {myAuthors?.length ? (
+              <div className="mt-0 flex space-x-6">
+                {myAuthors.map((author) =>
+                  author ? (
+                    <div
+                      key={author.name}
+                      className="flex items-center  text-sm"
+                    >
+                      <Link
+                        href={author.link}
+                        className="rounded-2xl p-3 mt-0 mb-0 flex items-center text-sm"
+                      >
+                        <Avatar>
+                          <AvatarImage loading="eager" src={author.avatar} />
+                          <AvatarFallback>
+                            {author.name.slice(0, 2).toUpperCase()}
+                          </AvatarFallback>
+                        </Avatar>
+                      </Link>
+                      <div className="flex-1 mt-0 mb-0 text-left leading-tight">
+                        <HoverCard>
+                          <HoverCardTrigger href={author.link}>
+                            <p className="font-medium mt-0 mb-0">
+                              {author.name}
+                            </p>
+                          </HoverCardTrigger>
+                          <HoverCardContent>
+                            <div
+                              key={author.name}
+                              className="flex items-center  text-sm"
+                            >
+                              <Avatar>
+                                <AvatarImage
+                                  loading="eager"
+                                  src={author.link}
+                                />
+                                <AvatarFallback>
+                                  {author.name.slice(0, 2).toUpperCase()}
+                                </AvatarFallback>
+                              </Avatar>
+                              <p className="font-medium mt-0 mb-0">
+                                {author.name}
+                              </p>
+                              <p className="font-medium mt-0 mb-0">
+                                {author.name}
+                              </p>
+                            </div>
+                          </HoverCardContent>
+                        </HoverCard>
+                        <p className="text-[12px] mt-0 mb-0 text-muted-foreground">
+                          @{author.name}
+                        </p>
+                      </div>
+                    </div>
+                  ) : null,
+                )}
+              </div>
+            ) : null}
           </div>
         </div>
         <img
           src={`/images/posts/${post.img}`}
           alt={post.img}
-          className="mt-0 mb-0 rounded-md bg-muted transition-colors h-40"
+          className="object-contain mt-0 mb-0 rounded-md bg-muted transition-colors w-full max-h-[20em]"
         />
-      </div>
-      <div className="flex-col">
-        {myAuthors?.length ? (
-          <div className="mt-0 flex space-x-6">
-            {myAuthors.map((author) =>
-              author ? (
-                <div key={author.name} className="flex items-center  text-sm">
-                  <Link
-                    href={author.link}
-                    className="rounded-2xl p-3 mt-0 mb-0 flex items-center text-sm"
-                  >
-                    <Avatar>
-                      <AvatarImage loading="eager" src={author.avatar} />
-                      <AvatarFallback>
-                        {author.name.slice(0, 2).toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
-                  </Link>
-                  <div className="flex-1 mt-0 mb-0 text-left leading-tight">
-                    <HoverCard>
-                      <HoverCardTrigger href={author.link}>
-                        <p className="font-medium mt-0 mb-0">{author.name}</p>
-                      </HoverCardTrigger>
-                      <HoverCardContent>
-                        <div
-                          key={author.name}
-                          className="flex items-center  text-sm"
-                        >
-                          <Avatar>
-                            <AvatarImage
-                              loading="eager"
-                              src={author.link}
-                            />
-                            <AvatarFallback>
-                              {author.name.slice(0, 2).toUpperCase()}
-                            </AvatarFallback>
-                          </Avatar>
-                          <p className="font-medium mt-0 mb-0">{author.name}</p>
-                          <p className="font-medium mt-0 mb-0">{author.name}</p>
-                        </div>
-                      </HoverCardContent>
-                    </HoverCard>
-                    <p className="text-[12px] mt-0 mb-0 text-muted-foreground">
-                      @{author.name}
-                    </p>
-                  </div>
-                </div>
-              ) : null,
-            )}
-          </div>
-        ) : null}
       </div>
       <hr className="my-4" />
       <MDXContent code={post.body} />

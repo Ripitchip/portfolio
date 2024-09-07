@@ -74,7 +74,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     findAuthorByName(writer),
   );
   return (
-    <article className="container py-6 prose dark:prose-invert max-w-3xl mx-auto">
+    <article className="container py-6 prose dark:prose-invert max-w-4xl mx-auto">
       <div className="grid grid-cols-2 gap-4">
         <div>
           <h1 className="mb-2">{project.title}</h1>
@@ -113,10 +113,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                             className="flex items-center  text-sm"
                           >
                             <Avatar>
-                              <AvatarImage
-                                loading="eager"
-                                src={author.link}
-                              />
+                              <AvatarImage loading="eager" src={author.link} />
                               <AvatarFallback>
                                 {author.name.slice(0, 2).toUpperCase()}
                               </AvatarFallback>
@@ -150,7 +147,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           alt={project.img}
           width={250}
           height={250}
-          className="mt-0 mb-0 rounded-md bg-muted transition-colors"
+          className="mt-0 mb-0 rounded-md bg-muted transition-colors w-full max-h-[18em]"
         />
 
         <div></div>
